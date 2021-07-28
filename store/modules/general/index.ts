@@ -11,24 +11,34 @@ import {
 
 import { State as RootState } from '@/store'
 
-// Declare state
+// TYPE | STATE
 export type State = {
   loading: boolean
+  drawer: boolean
 }
-
-// Create initial state
-const state: State = {
-  loading: false,
-}
-
-// Mutations enums
+// ENUM | MUTATIONS
 export enum MutationTypes {
   SET_LOADING = 'SET_LOADING',
+  SET_DRAWER = 'SET_DRAWER',
+}
+// ENUM | ACTIONS
+export enum ActionTypes {
+  setLoading = 'setLoading',
+}
+// TYPE | GETTERS
+export type Getters = {
+  isLoading(state: State): boolean
+}
+// Actual State
+const state: State = {
+  loading: false,
+  drawer: false,
 }
 
 // Mutation contracts
 type Mutations<S = State> = {
   [MutationTypes.SET_LOADING](state: S, payload: boolean): void
+  [MutationTypes.SET_DRAWER](state: S, payload: boolean): void
 }
 
 // Define mutations
@@ -36,11 +46,9 @@ const mutations: MutationTree<State> & Mutations = {
   [MutationTypes.SET_LOADING](state: State, payload: boolean) {
     state.loading = payload
   },
-}
-
-// Action enums
-export enum ActionTypes {
-  setLoading = 'setLoading',
+  [MutationTypes.SET_DRAWER](state: State, payload: boolean) {
+    state.drawer = payload
+  },
 }
 
 // Actions context
@@ -64,11 +72,6 @@ const actions: ActionTree<State, RootState> & Actions = {
   [ActionTypes.setLoading]({ commit }, payload: boolean) {
     commit(MutationTypes.SET_LOADING, payload)
   },
-}
-
-// getters types
-export type Getters = {
-  isLoading(state: State): boolean
 }
 
 // getters

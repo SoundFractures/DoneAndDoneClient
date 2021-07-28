@@ -6,6 +6,7 @@
       <v-btn text x-small class="primary">Hello</v-btn>
     </template>
     <v-card class="pa-2" outlined>Hello Dashboard</v-card>
+    <span>{{ drawer }}</span>
   </wrapper>
 </template>
 <script lang="ts">
@@ -18,6 +19,11 @@ export default {
   },
   data() {
     return {}
+  },
+  computed: {
+    drawer() {
+      return store.state.general.drawer
+    },
   },
   methods: {
     handleLoading(): void {

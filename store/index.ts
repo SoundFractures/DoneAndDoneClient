@@ -4,7 +4,8 @@ import {
   GeneralModule as general,
   Store as GeneralStore,
   State as GeneralState,
-  MutationTypes as GeneralMutationTypes,
+  MutationTypes as GeneralMTypes,
+  ActionTypes as GeneralATypes,
 } from '~/store/modules/general/index'
 
 export type State = {
@@ -25,5 +26,9 @@ export function useStore(): Store {
 }
 
 export const Mutations = {
-  general: GeneralMutationTypes,
+  general: GeneralMTypes,
+}
+
+export const Actions = {
+  general: GeneralATypes,
 }

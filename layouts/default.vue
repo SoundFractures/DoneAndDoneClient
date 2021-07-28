@@ -20,7 +20,7 @@
 import Vue from 'vue'
 import { userNavigationItems } from '~/utils/navigation/helpers'
 import DrawerNavigation from '~/components/navigation/DrawerNavigation.vue'
-import { useStore, Mutations } from '~/store'
+import { useStore, Actions } from '~/store'
 const store = useStore()
 export default Vue.extend({
   components: {
@@ -44,7 +44,7 @@ export default Vue.extend({
       this.$vuetify.theme.dark = !this.$vuetify.theme.dark
     },
     handleLoading(): void {
-      store.commit(Mutations.general.SET_LOADING, !this.isLoading)
+      store.dispatch(Actions.general.setLoading, !store.state.general.loading)
     },
   },
 })

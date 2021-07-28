@@ -1,10 +1,11 @@
 <template>
   <v-navigation-drawer
-    v-model="drawer"
+    :value="drawer"
     app
     :permanent="isDesktop"
     :mini-variant="miniDrawer"
     width="200"
+    @input="handleDrawer"
   >
     <v-list>
       <v-list-item class="px-2">
@@ -50,6 +51,8 @@
 </template>
 <script lang="ts">
 import Vue from 'vue'
+import { useStore, Mutations } from '~/store'
+const store = useStore()
 export default Vue.extend({
   props: {
     theme: {
@@ -62,9 +65,7 @@ export default Vue.extend({
     },
   },
   data() {
-    return {
-      drawer: false as boolean,
-    }
+    return {}
   },
   computed: {
     miniDrawer(): boolean {
@@ -73,15 +74,16 @@ export default Vue.extend({
     isDesktop(): boolean {
       return this.$vuetify.breakpoint.mdAndUp
     },
-  },
-  mounted() {
-    this.$nuxt.$on('SET_DRAWER', () => {
-      this.drawer = !this.drawer
-    })
+    drawer() {
+      return store.state.general.drawer
+    },
   },
   methods: {
     handleTheme(): void {
       this.$vuetify.theme.dark = !this.$vuetify.theme.dark
+    },
+    handleDrawer(value: boolean): void {
+      store.commit(Mutations.general.SET_DRAWER, value)
     },
     async logout() {
       await this.$auth.logout('local')
