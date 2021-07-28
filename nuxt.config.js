@@ -6,26 +6,22 @@ export default {
     titleTemplate: '%s - client',
     title: 'client',
     htmlAttrs: {
-      lang: 'en'
+      lang: 'en',
     },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
-      { name: 'format-detection', content: 'telephone=no' }
+      { name: 'format-detection', content: 'telephone=no' },
     ],
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [
-  ],
+  css: ['@/assets/global.css', '@mdi/font/css/materialdesignicons.min.css'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [
-  ],
+  plugins: ['@/plugins/composition-api'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -35,38 +31,84 @@ export default {
     // https://go.nuxtjs.dev/typescript
     '@nuxt/typescript-build',
     // https://go.nuxtjs.dev/vuetify
-    '@nuxtjs/vuetify',
+    ['@nuxtjs/vuetify', { iconfont: 'mdi' }],
   ],
-
+  loading: false,
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [
-    // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios',
-  ],
+  modules: ['@nuxtjs/axios', '@nuxtjs/auth-next'],
+  router: {
+    middleware: ['auth'],
+  },
+  auth: {
+    redirect: {
+      login: '/auth/login',
+      logout: '/',
+      callback: '/auth/login',
+      home: '/dashboard',
+    },
+    strategies: {
+      local: {
+        token: {
+          property: 'token',
+          global: true,
+          // required: true,
+          type: 'Bearer',
+        },
+        user: {
+          property: 'user',
+          autoFetch: true,
+        },
+        endpoints: {
+          login: { url: '/auth/login', method: 'post' },
+          user: { url: '/auth/user', method: 'get' },
+          logout: { url: '/auth/logout', method: 'post' },
+        },
+      },
+    },
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+    baseUrl: 'http://localhost:8000/api',
+  },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
-    customVariables: ['~/assets/variables.scss'],
+    defaultAssets: {
+      icons: 'md',
+    },
+    icons: {
+      iconfont: 'md',
+    },
+    customVariables: ['/assets/variables.scss'],
+    treeShake: true,
     theme: {
-      dark: true,
+      options: {
+        customProperties: true,
+      },
       themes: {
         dark: {
-          primary: colors.blue.darken2,
-          accent: colors.grey.darken3,
-          secondary: colors.amber.darken3,
+          primary: '#2F8AC6',
+          accent: colors.red.darken3,
+          secondary: colors.blue.darken3,
           info: colors.teal.lighten1,
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
-          success: colors.green.accent3
-        }
-      }
-    }
+          success: colors.green.accent3,
+        },
+        light: {
+          primary: '#2F8AC6',
+          accent: '#133C55',
+          secondary: '#386FA4',
+          info: colors.teal.lighten1,
+          warning: colors.amber.base,
+          error: colors.deepOrange.accent4,
+          success: colors.green.accent3,
+        },
+      },
+    },
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {
-  }
+  build: {},
 }
