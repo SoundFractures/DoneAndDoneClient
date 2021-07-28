@@ -1,8 +1,18 @@
 <template>
-  <div>Hello Habits</div>
+  <wrapper>
+    <template #topbar>
+      <v-btn text x-small class="primary">Add Habit</v-btn>
+      <v-spacer />
+    </template>
+    <v-card class="pa-2" outlined>Hello Habits</v-card>
+  </wrapper>
 </template>
 <script>
+import Wrapper from '~/components/general/Wrapper.vue'
 export default {
+  components: {
+    Wrapper,
+  },
   data() {
     return {}
   },

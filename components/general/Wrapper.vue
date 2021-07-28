@@ -1,13 +1,15 @@
 <template>
   <div>
-    <v-app-bar flat dense>
+    <v-app-bar flat dense class="appBarMargin">
       <v-app-bar-nav-icon
         v-if="!$vuetify.breakpoint.mdAndUp"
         @click="$nuxt.$emit('SET_DRAWER')"
       />
       <slot name="topbar" />
     </v-app-bar>
-    <slot />
+    <v-container fluid>
+      <slot />
+    </v-container>
   </div>
 </template>
 <script lang="ts">
@@ -17,3 +19,8 @@ export default Vue.extend({
   methods: {},
 })
 </script>
+<style scoped>
+.appBarMargin {
+  margin-bottom: 1.5em;
+}
+</style>
