@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <template v-if="!loading">
+    <template v-if="!isLoading">
       <drawer-navigation :theme="theme" :items="userNavigationItems" />
       <v-main>
         <Nuxt />
@@ -18,12 +18,10 @@
 </template>
 <script lang="ts">
 import Vue from 'vue'
-import { getModule } from 'vuex-module-decorators'
 import { userNavigationItems } from '~/utils/navigation/helpers'
 import DrawerNavigation from '~/components/navigation/DrawerNavigation.vue'
-
-import GeneralModule from '~/store/general'
-const store = getModule(GeneralModule)
+import { useStore, Mutations } from '~/store'
+const store = useStore()
 export default Vue.extend({
   components: {
     DrawerNavigation,
@@ -37,8 +35,8 @@ export default Vue.extend({
     theme() {
       return this.$vuetify.theme.dark ? 'dark' : 'light'
     },
-    loading() {
-      return store.loading
+    isLoading(): any {
+      return store.state.general.loading
     },
   },
   methods: {
@@ -46,7 +44,7 @@ export default Vue.extend({
       this.$vuetify.theme.dark = !this.$vuetify.theme.dark
     },
     handleLoading(): void {
-      store.SET_LOADING(false)
+      store.commit(Mutations.general.SET_LOADING, !this.isLoading)
     },
   },
 })

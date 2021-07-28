@@ -9,12 +9,9 @@
   </wrapper>
 </template>
 <script lang="ts">
-import { getModule } from 'vuex-module-decorators'
 import Wrapper from '~/components/general/Wrapper.vue'
-
-import GeneralModule from '~/store/general'
-const store = getModule(GeneralModule)
-
+import { useStore, Mutations } from '~/store'
+const store = useStore()
 export default {
   components: {
     Wrapper,
@@ -22,14 +19,9 @@ export default {
   data() {
     return {}
   },
-  computed: {
-    loading() {
-      return store.loading
-    },
-  },
   methods: {
     handleLoading(): void {
-      store.setLoading(true)
+      store.commit(Mutations.general.SET_LOADING, !store.state.general.loading)
     },
   },
 }
