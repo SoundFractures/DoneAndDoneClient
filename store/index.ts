@@ -1,8 +1,5 @@
+import Vue from 'vue'
 import Vuex from 'vuex'
-import general from '~/store/general'
 
-export const store = new Vuex.Store({
-  modules: {
-    general,
-  },
-})
+Vue.use(Vuex)
+export const store = new Vuex.Store<any>({})

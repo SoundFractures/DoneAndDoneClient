@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar :clipped-left="clipped" fixed app>
+    <v-app-bar fixed app>
       <link-button text="Home" to="/" />
       <v-spacer />
       <link-button text="Sign in" to="/auth/login" />
