@@ -9,16 +9,20 @@
     <v-main>
       <Nuxt />
     </v-main>
+    <snackbar />
   </v-app>
 </template>
 <script lang="ts">
 import Vue from 'vue'
+import Snackbar from '~/components/general/Snackbar.vue'
 import LinkButton from '~/components/navigation/LinkButton.vue'
 export default Vue.extend({
   auth: 'guest',
   components: {
     LinkButton,
+    Snackbar,
   },
+  layout: 'master',
   data() {
     return {
       value: 'recents' as string,
@@ -36,11 +40,3 @@ export default Vue.extend({
   },
 })
 </script>
-<style>
-/* .theme--dark.v-application {
-  background-color: var(--v-background-base) !important;
-}
-.theme--light.v-application {
-  background-color: var(--v-background-base) !important;
-} */
-</style>

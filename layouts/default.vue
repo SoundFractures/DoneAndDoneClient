@@ -6,6 +6,7 @@
         <Nuxt />
       </v-main>
     </template>
+
     <template v-else>
       <v-container fill-height fluid>
         <v-row align="center" justify="center">
@@ -14,18 +15,23 @@
         </v-row>
       </v-container>
     </template>
+    <snackbar />
   </v-app>
 </template>
 <script lang="ts">
 import Vue from 'vue'
 import { userNavigationItems } from '~/utils/navigation/helpers'
 import DrawerNavigation from '~/components/navigation/DrawerNavigation.vue'
-import { useStore, Actions } from '~/store'
+import Snackbar from '~/components/general/Snackbar.vue'
+
+import { useStore } from '~/store'
 const store = useStore()
 export default Vue.extend({
   components: {
     DrawerNavigation,
+    Snackbar,
   },
+  layout: 'master',
   data() {
     return {
       userNavigationItems,
@@ -42,9 +48,6 @@ export default Vue.extend({
   methods: {
     handleTheme(): void {
       this.$vuetify.theme.dark = !this.$vuetify.theme.dark
-    },
-    handleLoading(): void {
-      store.dispatch(Actions.general.setLoading, !store.state.general.loading)
     },
   },
 })

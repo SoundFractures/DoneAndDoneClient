@@ -11,7 +11,8 @@
 </template>
 
 <script>
-export default {
+import Vue from 'vue'
+export default Vue.extend({
   layout: 'empty',
   props: {
     error: {
@@ -32,7 +33,7 @@ export default {
       title,
     }
   },
-}
+})
 </script>
 
 <style scoped>

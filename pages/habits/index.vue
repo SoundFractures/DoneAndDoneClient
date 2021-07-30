@@ -8,13 +8,14 @@
   </wrapper>
 </template>
 <script>
+import Vue from 'vue'
 import Wrapper from '~/components/general/Wrapper.vue'
-export default {
+export default Vue.extend({
   components: {
     Wrapper,
   },
   data() {
     return {}
   },
-}
+})
 </script>

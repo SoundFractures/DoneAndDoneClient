@@ -1,4 +1,4 @@
-import colors from 'vuetify/es5/util/colors'
+// import colors from 'vuetify/es5/util/colors'
 
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -21,7 +21,10 @@ export default {
   css: ['@/assets/global.css', '@mdi/font/css/materialdesignicons.min.css'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['@/plugins/composition-api'],
+  plugins: [
+    { src: '~/plugins/repository.ts', ssr: true },
+    { src: '~/plugins/axios.ts', ssr: true },
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -69,7 +72,7 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseUrl: 'http://localhost:8000/api',
+    baseUrl: 'http://localhost:4000/api',
   },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
@@ -89,21 +92,21 @@ export default {
       themes: {
         dark: {
           primary: '#2F8AC6',
-          accent: colors.red.darken3,
-          secondary: colors.blue.darken3,
-          info: colors.teal.lighten1,
-          warning: colors.amber.base,
-          error: colors.deepOrange.accent4,
-          success: colors.green.accent3,
+          accent: '#133C55',
+          secondary: '#386FA4',
+          info: '#2F8AC6',
+          warning: '#FF8000',
+          error: '#EE4A4A',
+          success: '#1A9A33',
         },
         light: {
           primary: '#2F8AC6',
           accent: '#133C55',
           secondary: '#386FA4',
-          info: colors.teal.lighten1,
-          warning: colors.amber.base,
-          error: colors.deepOrange.accent4,
-          success: colors.green.accent3,
+          info: '#2F8AC6',
+          warning: '#FF8000',
+          error: '#EE4A4A',
+          success: '#1A9A33',
         },
       },
     },

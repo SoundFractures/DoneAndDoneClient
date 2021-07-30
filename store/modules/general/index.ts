@@ -8,18 +8,20 @@ import {
   CommitOptions,
   DispatchOptions,
 } from 'vuex'
-
 import { State as RootState } from '@/store'
+import { Snackbar, STATUS_COLOR } from '~/utils/types'
 
 // TYPE | STATE
 export type State = {
   loading: boolean
   drawer: boolean
+  snackbar: Snackbar
 }
 // ENUM | MUTATIONS
 export enum MutationTypes {
   SET_LOADING = 'SET_LOADING',
   SET_DRAWER = 'SET_DRAWER',
+  SET_SNACKBAR = 'SET_SNACKBAR',
 }
 // ENUM | ACTIONS
 export enum ActionTypes {
@@ -33,12 +35,18 @@ export type Getters = {
 const state: State = {
   loading: false,
   drawer: false,
+  snackbar: {
+    message: '',
+    type: STATUS_COLOR.success,
+    timeout: 2000,
+  },
 }
 
 // Mutation contracts
 type Mutations<S = State> = {
   [MutationTypes.SET_LOADING](state: S, payload: boolean): void
   [MutationTypes.SET_DRAWER](state: S, payload: boolean): void
+  [MutationTypes.SET_SNACKBAR](state: S, payload: Snackbar): void
 }
 
 // Define mutations
@@ -48,6 +56,14 @@ const mutations: MutationTree<State> & Mutations = {
   },
   [MutationTypes.SET_DRAWER](state: State, payload: boolean) {
     state.drawer = payload
+  },
+  [MutationTypes.SET_SNACKBAR](
+    state: State,
+    { message, type = STATUS_COLOR.success, timeout = 2000 }: Snackbar
+  ) {
+    state.snackbar.message = message
+    state.snackbar.type = type
+    state.snackbar.timeout = timeout
   },
 }
 
