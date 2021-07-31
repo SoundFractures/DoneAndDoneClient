@@ -1,7 +1,7 @@
 const resource: string = 'user'
 
 export const userRepository = ($axios) => ({
-  index() {
+  list() {
     return new Promise((resolve, reject) => {
       $axios
         .$get(`/${resource}`)
@@ -48,7 +48,7 @@ export const userRepository = ($axios) => ({
 })
 
 export type UserRepository = {
-  index: () => Promise<any>
+  list: () => Promise<any>
   find: (id: string) => Promise<any>
   create: (payload: {
     email: string

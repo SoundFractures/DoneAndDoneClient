@@ -5,7 +5,9 @@
       <v-spacer />
       <v-btn text x-small class="primary">Hello</v-btn>
     </template>
-    <v-card class="pa-2" outlined>Banana</v-card>
+    <v-card v-for="item in users" :key="item._id" class="pa-2" outlined>{{
+      item.email
+    }}</v-card>
   </wrapper>
 </template>
 <script lang="ts">
@@ -22,6 +24,11 @@ export default Vue.extend({
     return {
       users: [] as Array<any>,
     }
+  },
+  mounted() {
+    this.$repository.user.list().then((data) => {
+      this.users = data
+    })
   },
   methods: {
     testFunction() {

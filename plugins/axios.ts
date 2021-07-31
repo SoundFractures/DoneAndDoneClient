@@ -7,7 +7,7 @@ export default (ctx) => {
     store.commit(Mutations.general.SET_SNACKBAR, {
       message: error.response.data.error,
       type: STATUS_COLOR.error,
-      timeout: 5000,
+      timeout: 2500,
     })
 
     return Promise.reject(error)
